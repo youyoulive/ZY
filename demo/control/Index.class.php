@@ -20,6 +20,7 @@ class Index extends Controller{
         $data['sex'] = "3";
         $User = new UserModel();
         $res = $User->where("id = 2")->delete();
+        echo $User->getLastSql();
         var_dump($res);
         $this->display('run.php');
     }

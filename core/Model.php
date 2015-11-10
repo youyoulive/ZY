@@ -65,6 +65,7 @@ class Model{
                     $setStr .= $key ."= '". $val ."',";
                 }
                 $sql .= rtrim($setStr, ',') ." ". $this->options['where'];
+                $this->lastSql = $sql;
                 return $this->db->queryUpdate($sql);
             }
         }else{
@@ -77,6 +78,7 @@ class Model{
             return false;
         }else{
             $sql = "delete from  ".$this->tableName." ". $this->options['where'];
+            $this->lastSql = $sql;
             return $this->db->queryDelete($sql);
         }
     }
