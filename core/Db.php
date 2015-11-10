@@ -37,4 +37,28 @@ class Db{
         }
         return $resultArray;
     }
+
+    function queryInsert($sql){
+        if(mysql_query($sql)){
+            return mysql_insert_id();
+        }else{
+            return false;
+        }
+    }
+
+    function queryUpdate($sql){
+        if(mysql_query($sql)){
+            return mysql_affected_rows();
+        }else{
+            return false;
+        }
+    }
+
+    function queryDelete($sql){
+        if(mysql_query($sql)){
+            return mysql_affected_rows();
+        }else{
+            return false;
+        }
+    }
 }

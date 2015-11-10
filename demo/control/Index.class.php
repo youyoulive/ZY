@@ -7,6 +7,7 @@
 
 class Index extends Controller{
     public function run(){
+        /*
         $User = new UserModel();
         $data = $User->getAll();
         var_dump($data);
@@ -14,6 +15,12 @@ class Index extends Controller{
         $Tag = new TagModel();
         $data = $Tag->getAll();
         var_dump($data);
+        */
+        $data['username'] = "demo01";
+        $data['sex'] = "3";
+        $User = new UserModel();
+        $res = $User->where("id = 2")->delete();
+        var_dump($res);
         $this->display('run.php');
     }
 }

@@ -37,15 +37,48 @@ class Model{
     }
 
     function insert($data){
-
+        if(is_array($data)){
+            $sql = "insert into ".$this->tableName;
+            $fieldStr = "";
+            $valueStr = "";
+            foreach($data as $key=>$val){
+                $fieldStr .= ",".$key;
+                $valueStr .= ",'".$val."'";
+            }
+            $sql .= " (".ltrim($fieldStr, ",").") ";
+            $sql .= " values (".ltrim($valueStr, ",") .") ";
+            $this->lastSql = $sql;
+            return $this->db->queryInsert($sql);
+        }else{
+            return false;
+        }
     }
 
     function update($data){
-
+        if(is_array($data)){
+            if(empty($this->options['where'])){
+                return false;
+            }else{
+                $sql = "update ".$this->tableName." set ";
+                $setStr = "";
+                foreach($data as $key=>$val){
+                    $setStr .= $key ."= '". $val ."',";
+                }
+                $sql .= rtrim($setStr, ',') ." ". $this->options['where'];
+                return $this->db->queryUpdate($sql);
+            }
+        }else{
+            return false;
+        }
     }
 
-    function del(){
-
+    function delete(){
+        if(empty($this->options['where'])){
+            return false;
+        }else{
+            $sql = "delete from  ".$this->tableName." ". $this->options['where'];
+            return $this->db->queryDelete($sql);
+        }
     }
 
     function order(){
