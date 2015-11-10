@@ -11,17 +11,8 @@ class UserModel extends Model{
         parent::__construct('user');
     }
 
-    function getTable(){
-        return 'user';
-    }
-
-    function getNews() {
-       $db = Db::getDb();
-        $result = $db->select();
-        var_dump($result);
-        while($row = mysql_fetch_row($result)){
-            var_dump($row);
-        }
+    function getAll(){
+        return $this->field("id,username")->select();
     }
 
 }

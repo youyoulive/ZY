@@ -28,26 +28,8 @@ class Db{
         self ::$i++;
     }
 
-    function select(){
-        $sql = "select " . $this->options['field'];
-
-        if($this->options['tableName']){
-            $sql .= " from " .$this->options['tableName'];
-        }else{
-            die("table not exists");
-        }
-
-        if($this->options['where']){
-            $sql .= " where " .$this->options['where'];
-        }
-
-        if($this->options['order']){
-            $sql .= " order by " .$this->options['order'];
-        }
-        if($this->options['limit']){
-            $sql .= " limit " . $this->options['limit'];
-        }
-
+    function querySelect($sql){
+        echo $sql;
         $result = mysql_query($sql);
         $resultArray = array();
         while($res = mysql_fetch_assoc($result)){
@@ -55,63 +37,4 @@ class Db{
         }
         return $resultArray;
     }
-
-    function find(){
-        $sql = "select " . $this->options['field'];
-
-        if($this->options['tableName']){
-            $sql .= " from " .$this->options['tableName'];
-        }else{
-            die("table not exists");
-        }
-
-        if($this->options['where']){
-            $sql .= " where " .$this->options['where'];
-        }
-
-        if($this->options['order']){
-            $sql .= " order by " .$this->options['order'];
-        }
-
-        $sql .= " limit 0,1";
-
-
-        $result = mysql_query($sql);
-        $res = mysql_fetch_assoc($result);
-        return $res;
-    }
-
-    function table($tablename){
-        $this->options['tableName'] = $tablename;
-        return $this;
-    }
-
-    function field($field){
-        if(!is_string($field)) {
-            $field = "*";
-        }
-        $this->options['field']   =   $field;
-        return $this;
-    }
-
-    function order($order){
-        if(!is_string($order)){
-            $order = "id DESC";
-        }
-        $this->options['order']   =   $order;
-        return $this;
-    }
-
-    function limit($limit){
-        $this->options['limit'] = $limit;
-        return $this;
-    }
-
-    function where($where){
-        $this->options['where'] = $where;
-        return $this;
-    }
-
-
-
 }

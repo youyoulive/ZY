@@ -8,7 +8,12 @@
 class Index extends Controller{
     public function run(){
         $User = new UserModel();
-        $data = $User->getNews();
+        $data = $User->getAll();
+        var_dump($data);
+
+        $Tag = new TagModel();
+        $data = $Tag->getAll();
+        var_dump($data);
         $this->display('run.php');
     }
 }
