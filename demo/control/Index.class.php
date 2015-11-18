@@ -7,21 +7,9 @@
 
 class Index extends Controller{
     public function run(){
-        /*
-        $User = new UserModel();
-        $data = $User->getAll();
-        var_dump($data);
-
-        $Tag = new TagModel();
-        $data = $Tag->getAll();
-        var_dump($data);
-        */
-        $data['username'] = "demo01";
-        $data['sex'] = "3";
-        $User = new UserModel();
-        $res = $User->where("id = 2")->delete();
-        echo $User->getLastSql();
-        var_dump($res);
+        $Ask = new AskModel();
+        $title = $Ask->table('ask a')->join('t_ask_a b on a.id = b.id','LEFT')->where('id = 2')->limit("2")->group('tag')->order("id ASC")->getAll();
+        var_dump($title);
         $this->display('run.php');
     }
 }

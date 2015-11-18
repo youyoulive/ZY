@@ -29,7 +29,6 @@ class Db{
     }
 
     function querySelect($sql){
-        echo $sql;
         $result = mysql_query($sql);
         $resultArray = array();
         while($res = mysql_fetch_assoc($result)){
